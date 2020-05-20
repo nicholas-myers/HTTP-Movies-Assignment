@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -11,44 +11,67 @@ const UpdateMovieForm = styled.form`
 `;
 
 const initialMovie = {
-    title: "",
-    director: "",
-    metascore: ""
-}
+  title: "",
+  director: "",
+  metascore: "",
+};
 
 export default function UpdateMovie(props) {
-  console.log(props.movieList);
+  const { push } = useHistory();
+  //   console.log(props.movieList);
   const { id } = useParams();
-//   console.log(id);
-  const [movie, setMovie] = useState(initialMovie)
+  //   console.log(id);
+  const [movie, setMovie] = useState(initialMovie);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/movies/${id}`)
-    .then(res => {
-        console.log(res)
-        setMovie(res.data)
-    })
-    .catch(err => {
-        console.log(err)
-    })
-  }, [id])
+    axios
+      .get(`http://localhost:5000/api/movies/${id}`)
+      .then((res) => {
+        console.log(res);
+        setMovie(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
+  const changeMovieInputs = (e) => {
+    setMovie({
+      ...movie,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const updateMovie = (e) => {
+    e.preventDefault();
+    axios
+      .put(`http://localhost:5000/api/movies/${id}`, movie)
+      .then((res) => {
+        console.log(res.data);
+        console.log(props.movieList);
+        //   props.setMovieList(props.movieList)
+        push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
-    <UpdateMovieForm>
+    <UpdateMovieForm onSubmit={updateMovie}>
       <label htmlFor="title">title</label>
-      <input 
-      name="title"
-      value={movie.title}
-      />
+      <input name="title" value={movie.title} onChange={changeMovieInputs} />
       <label htmlFor="director">director</label>
-      <input 
-      name="director"
-      value={movie.director}
+      <input
+        name="director"
+        value={movie.director}
+        onChange={changeMovieInputs}
       />
       <label htmlFor="metascore">metascore</label>
-      <input 
-      name="metascore"
-      value={movie.metascore}
+      <input
+        name="metascore"
+        value={movie.metascore}
+        onChange={changeMovieInputs}
       />
       <button>Update Movie</button>
     </UpdateMovieForm>
