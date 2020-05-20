@@ -29,9 +29,9 @@ function Movie({ addToSavedList }) {
   return (
     <div className="save-wrapper">
       <MovieCard movie={movie} />
-
+      <button>Edit Movie</button>
       <div className="save-button" onClick={saveMovie}>
-        Save
+        Save Movie
       </div>
     </div>
   );
