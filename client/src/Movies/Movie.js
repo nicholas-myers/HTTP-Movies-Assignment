@@ -30,7 +30,10 @@ function Movie({ addToSavedList }) {
   return (
     <div className="save-wrapper">
       <MovieCard movie={movie} />
-      <button onClick={() => push(`/update-movie/${params.id}`)}>Edit Movie</button>
+      <button onClick={() => push(`/update-movie/${params.id}`)}>
+        Edit Movie
+      </button>
+
       <div className="save-button" onClick={saveMovie}>
         Save Movie
       </div>

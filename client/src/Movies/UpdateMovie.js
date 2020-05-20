@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function UpdateMovie(props) {
-    console.log(props.stars)
+    console.log(props.movieList)
   return (
     <form>
       <label>title</label>
@@ -10,6 +10,7 @@ export default function UpdateMovie(props) {
       <input />
       <label>metascore</label>
       <input />
+      <button>Update Movie</button>
     </form>
   );
 }
