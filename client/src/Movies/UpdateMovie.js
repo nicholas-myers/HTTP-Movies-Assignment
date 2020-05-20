@@ -27,7 +27,7 @@ export default function UpdateMovie(props) {
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setMovie(res.data);
       })
       .catch((err) => {
@@ -47,9 +47,7 @@ export default function UpdateMovie(props) {
     axios
       .put(`http://localhost:5000/api/movies/${id}`, movie)
       .then((res) => {
-        console.log(res.data);
-        console.log(props.movieList);
-        //   props.setMovieList(props.movieList)
+        console.log(res.data)
         push("/");
       })
       .catch((err) => {
