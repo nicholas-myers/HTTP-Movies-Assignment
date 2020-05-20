@@ -36,7 +36,7 @@ const App = () => {
         <Movie addToSavedList={addToSavedList} />
       </Route>
       <Route path="/update-movie/:id">
-        <UpdateMovie movieList={movieList} />
+        <UpdateMovie movieList={movieList} setMovieList={setMovieList} />
       </Route>
     </>
   );
